@@ -1,0 +1,37 @@
+body {
+margin: 0;
+padding: 0;
+}
+
+main {
+display: flex;
+flex-wrap: nowrap;
+height: 100vh;
+height: -webkit-fill-available;
+max-height: 100vh;
+overflow-x: auto;
+overflow-y: hidden;
+}
+
+
+.dropdown-toggle { outline: 0; }
+.sidebar{
+    position: fixed; /* Make the sidebar immovable*/
+    z-index: 1; /* Side bar stays at the top */
+    top: 0;
+    left: 0;
+    overflow-x: hidden; /* restricting horizontal scroll */
+    height: 100vh
+}
+.sidebar .nav-link span{
+    padding-left: 10px;
+}
+.sidebar .user-profile{
+    position: absolute;
+    bottom: 10px;
+    width: 88%;
+}
+
+.navbar{
+    padding-left: 300px;
+}
