@@ -12,9 +12,13 @@ class Role extends Model
     // {
     //     return $this->belongsToMany(Permission::class, 'role_permissions');
     // }
-    public function employees()
+    public function users()
     {
         return $this->hasMany(User::class);
+    }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'role_permissions');
     }
     protected $fillable = ['role'];
 }

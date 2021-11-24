@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     use HasFactory;
-    protected $fillable = ['component'];
-    public $timestamps = false;
-
-    public function permissions()
+    protected $fillable = ['permission', 'p_component_id'];
+    public $dates = ['deleted_at'];
+    public function component()
     {
-        return $this->hasMany(pemission::class);
+        return $this->belongsTo(PermissionComponent::class, 'p_component_id');
     }
 }

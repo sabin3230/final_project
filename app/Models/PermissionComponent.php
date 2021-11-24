@@ -13,7 +13,6 @@ class PermissionComponent extends Model
 
     public function permissions()
     {
-        return $this->hasMany(permission::class);
+        return $this->hasMany(Permission::class);
     }
 }
-

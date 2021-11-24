@@ -31,7 +31,13 @@ overflow-y: hidden;
     bottom: 10px;
     width: 88%;
 }
-
-.navbar{
-    padding-left: 300px;
+.container-section{
+    width:83.32%;
+    padding:0;
+}
+.container-section nav{
+    padding: 8px 10px;
+}
+.main-content{
+    padding:15px;
 }

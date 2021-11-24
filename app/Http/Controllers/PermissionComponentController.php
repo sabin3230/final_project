@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PermissionComponent;
-use App\Http\Requests\StorePermissionComponentRequest;
-use App\Http\Requests\UpdatePermissionComponentRequest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use App\Models\permission_component;
+use Session;
 
 class PermissionComponentController extends Controller
 {
@@ -15,7 +17,10 @@ class PermissionComponentController extends Controller
      */
     public function index()
     {
-        //
+        if (!Gate::allows('permission-view')) {
+            return abort(401);
+        }
+        return view('admin.permission_components.index')->with('components', permission_component::all());
     }
 
     /**
@@ -25,27 +30,38 @@ class PermissionComponentController extends Controller
      */
     public function create()
     {
-        //
+        if (!Gate::allows('permission-add')) {
+            return abort(401);
+        }
+        return view('admin.permission_components.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePermissionComponentRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePermissionComponentRequest $request)
+    public function store(Request $request)
     {
-        //
+        if (!Gate::allows('permission-add')) {
+            return abort(401);
+        }
+        $this->validate($request, [
+            'component' => 'required'
+        ]);
+        permission_component::create($request->all());
+
+        return redirect()->route('p_component.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PermissionComponent  $permissionComponent
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PermissionComponent $permissionComponent)
+    public function show($id)
     {
         //
     }
@@ -53,34 +69,47 @@ class PermissionComponentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PermissionComponent  $permissionComponent
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PermissionComponent $permissionComponent)
+    public function edit($id)
     {
-        //
+        if (!Gate::allows('permission-edit')) {
+            return abort(401);
+        }
+        return view('admin.permission_components.edit')->with('p_component', permission_component::find($id));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePermissionComponentRequest  $request
-     * @param  \App\Models\PermissionComponent  $permissionComponent
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePermissionComponentRequest $request, PermissionComponent $permissionComponent)
+    public function update(Request $request, $id)
     {
-        //
+        if (!Gate::allows('permission-edit')) {
+            return abort(401);
+        }
+        permission_component::find($id)->update($request->all());
+
+        return redirect()->route('p_component.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PermissionComponent  $permissionComponent
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PermissionComponent $permissionComponent)
+    public function destroy($id)
     {
-        //
+        if (!Gate::allows('permission-delete')) {
+            return abort(401);
+        }
+        permission_component::find($id)->delete();
+
+        return redirect()->back();
     }
 }

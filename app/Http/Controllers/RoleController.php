@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Models\Permission;
+use App\Models\PermissionComponent;
 use App\Models\Role;
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
+use Illuminate\Support\Facades\Gate;
+use Session;
 
 class RoleController extends Controller
 {
@@ -15,7 +18,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        //dd('hello');
+        return view('admin.roles.index')->with('roles', Role::all());
     }
 
     /**
@@ -25,27 +29,31 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create')->with('permissions', Permission::all())
+                                            ->with('p_components', PermissionComponent::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRoleRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRoleRequest $request)
+    public function store(Request $request)
     {
-        //
+        $role = Role::create($request->all());
+        $role->permissions()->sync($request->permission);
+
+        return redirect()->route('role.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show($id)
     {
         //
     }
@@ -53,34 +61,41 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
+        return view('admin.roles.edit')->with('role', Role::findOrFail($id))
+        ->with('permissions', Permission::all())
+        ->with('p_components', PermissionComponent::all());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRoleRequest  $request
-     * @param  \App\Models\Role  $role
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(Request $request, $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->update($request->all());
+        $role->permissions()->sync(array_filter((array) $request->permission));
+
+        return redirect()->route('role.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
-        //
+        Role::find($id)->delete();
+        return view('admin.roles.index');
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Models\PermissionComponent;
+use App\Models\Role;
 use App\Models\Permission;
-use App\Http\Requests\StorePermissionRequest;
-use App\Http\Requests\UpdatePermissionRequest;
+use Illuminate\Support\Facades\Gate;
+use Session;
 
 class PermissionController extends Controller
 {
@@ -15,7 +18,11 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        if(! Gate::allows('permission-view')){
+            return abort(401);
+        }
+        return view('admin.permissions.index')->with('permissions', Permission::all())
+                                                ->with('p_components', PermissionComponent::all());
     }
 
     /**
@@ -25,27 +32,32 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permissions.create')->with('p_components', PermissionComponent::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePermissionRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePermissionRequest $request)
+    public function store(Request $request)
     {
-        //
+        $permission = str_slug($request->permission);
+        Permission::create([
+            'permission' => $permission,
+            'p_component_id' => $request->component
+        ]);
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Permission  $permission
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Permission $permission)
+    public function show($id)
     {
         //
     }
@@ -53,34 +65,44 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Permission  $permission
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission)
+    public function edit($id)
     {
-        //
+        $permission = Permission::find($id);
+
+        return view('admin.permissions.edit')->with('permission', $permission)
+                                                ->with('p_components', PermissionComponent::all());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePermissionRequest  $request
-     * @param  \App\Models\Permission  $permission
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePermissionRequest $request, Permission $permission)
+    public function update(Request $request, $id)
     {
-        //
+        $permission = Permission::find($id);
+        $permission->permission = str_slug($request->permission);
+        $permission->p_component_id = $request->component;
+        $permission->save();
+        
+        Session::flash('success', 'Permission Updated Successfully!!!');
+        return redirect()->route('permission.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Permission  $permission
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy($id)
     {
-        //
+        Permission::find($id)->delete();
+        return redirect()->route('permission.index');
     }
 }

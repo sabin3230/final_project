@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Role;
+use DB;
 
 class RoleSeeder extends Seeder
 {
@@ -13,6 +15,17 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Role::truncate();
+        $items = [
+            ['id' => 1, 'role' => 'admin'],
+            ['id' => 2, 'role' => 'employee'],
+            
+        ];
+        //inserts data in items to database
+        foreach($items as $item)
+        {
+            Role::create($item);
+        }
     }
 }
