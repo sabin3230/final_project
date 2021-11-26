@@ -33,7 +33,13 @@ class PermissionSeeder extends Seeder
             ['permission' => 'permission-view', 'p_component_id' => 3 ],
             ['permission' => 'permission-delete', 'p_component_id' => 3 ],
             ['permission' => 'permission-action', 'p_component_id' => 3 ],
-            ['permission' => 'permission_comp_add', 'p_component_id' => 4]
+            ['permission' => 'permission_comp_add', 'p_component_id' => 4],
+            ['permission' => 'org-add', 'p_component_id' => 5],
+            ['permission' => 'org-view', 'p_component_id' => 5],
+            ['permission' => 'org-delete', 'p_component_id' => 5],
+            ['permission' => 'org-edit', 'p_component_id' => 5],
+            ['permission' => 'org-action', 'p_component_id' => 5],
+
         ];
 
         foreach ($items as $item) {

@@ -18,10 +18,15 @@ Route::get('/', [App\Http\Controllers\HomeController::class,'index']);
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::get('/dash',[App\Http\Controllers\AdminController::class,'index'])->name('home');
+    Route::get('/dashboard',[App\Http\Controllers\AdminController::class,'index'])->name('dash');
     Route::resource('role', App\Http\Controllers\RoleController::class);
     Route::resource('permission', App\Http\Controllers\PermissionController::class);
     Route::resource('p_component', App\Http\Controllers\PermissionComponentController::class);
+    Route::post('org', [App\Http\Controllers\OrganizationController::class,'store'])->name('org.store');
+    Route::get('org/create', [App\Http\Controllers\OrganizationController::class,'create'])->name('org.create');
+    // dd();
+    Route::resource('org', App\Http\Controllers\OrganizationController::class);
+
 
 });
 

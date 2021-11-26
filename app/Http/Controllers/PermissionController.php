@@ -7,6 +7,7 @@ use App\Models\PermissionComponent;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 use Session;
 
 class PermissionController extends Controller
@@ -43,7 +44,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $permission = str_slug($request->permission);
+        $permission = Str::slug($request->permission);
         Permission::create([
             'permission' => $permission,
             'p_component_id' => $request->component

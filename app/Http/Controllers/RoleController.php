@@ -29,6 +29,9 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if(! Gate::allows('role-add')){
+            return abort(401);
+        }
         return view('admin.roles.create')->with('permissions', Permission::all())
                                             ->with('p_components', PermissionComponent::all());
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
-use App\Models\permission_component;
+use App\Models\PermissionComponent;
 use Session;
 
 class PermissionComponentController extends Controller
@@ -20,7 +20,7 @@ class PermissionComponentController extends Controller
         if (!Gate::allows('permission-view')) {
             return abort(401);
         }
-        return view('admin.permission_components.index')->with('components', permission_component::all());
+        return view('admin.permission_components.index')->with('components', PermissionComponent::all());
     }
 
     /**
@@ -50,7 +50,7 @@ class PermissionComponentController extends Controller
         $this->validate($request, [
             'component' => 'required'
         ]);
-        permission_component::create($request->all());
+        PermissionComponent::create($request->all());
 
         return redirect()->route('p_component.index');
     }
@@ -77,7 +77,7 @@ class PermissionComponentController extends Controller
         if (!Gate::allows('permission-edit')) {
             return abort(401);
         }
-        return view('admin.permission_components.edit')->with('p_component', permission_component::find($id));
+        return view('admin.permission_components.edit')->with('p_component', PermissionComponent::find($id));
     }
 
     /**

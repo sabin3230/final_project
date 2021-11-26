@@ -22,6 +22,7 @@ class PermissionComponentSeeder extends Seeder
             ['id' => 2, 'component' => 'Role Management'],
             ['id' => 3, 'component' => 'Permission'],
             ['id' => 4, 'component' => 'Permission Component'],
+            ['id' => 5, 'component' => 'Organization'],
         ];
 
         foreach($items as $item)

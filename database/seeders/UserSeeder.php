@@ -19,7 +19,10 @@ class UserSeeder extends Seeder
         User::truncate();
         $items = [
             [
-                'name'=>'admin', 
+                'first_name'=>'admin', 
+                'last_name'=>'admin',
+                'address'=>'admi9n',
+                'contact'=>'4566',
                 'email' => 'admin@admin.com', 
                 'password' => bcrypt('hello123'), 
                 'role_id' => 1,
