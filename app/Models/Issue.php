@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Feedback extends Model
+class Issue extends Model
 {
     use HasFactory;
-    protected $fillable =['id','customer_id','description'];
 }

@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Feedback extends Model
+class Booking extends Model
 {
     use HasFactory;
-    protected $fillable =['id','customer_id','description'];
+    protected $fillable =['id', 'booking_date', 'booking_time', 'completed_km', 'customer_vehicle'];
 }

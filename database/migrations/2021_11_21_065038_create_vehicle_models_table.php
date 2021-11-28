@@ -14,8 +14,16 @@ class CreateVehicleModelsTable extends Migration
     public function up()
     {
         Schema::create('vehicle_models', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->String('mode_name', 100);
+            $table->String('emgine_capacity');
+            $table->String('color');
+            $table->bigInteger('organization_id')->unsigned();
+            $table->foreign('organization_id')
+                  ->references('id')
+                  ->on('organizations')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 

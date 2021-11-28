@@ -23,6 +23,7 @@ class PermissionComponentSeeder extends Seeder
             ['id' => 3, 'component' => 'Permission'],
             ['id' => 4, 'component' => 'Permission Component'],
             ['id' => 5, 'component' => 'Organization'],
+            ['id' => 5, 'component' => 'Vehicle Model'],
         ];
 
         foreach($items as $item)

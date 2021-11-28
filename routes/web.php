@@ -22,10 +22,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('role', App\Http\Controllers\RoleController::class);
     Route::resource('permission', App\Http\Controllers\PermissionController::class);
     Route::resource('p_component', App\Http\Controllers\PermissionComponentController::class);
-    Route::post('org', [App\Http\Controllers\OrganizationController::class,'store'])->name('org.store');
-    Route::get('org/create', [App\Http\Controllers\OrganizationController::class,'create'])->name('org.create');
+   
+   
+
     // dd();
     Route::resource('org', App\Http\Controllers\OrganizationController::class);
+    Route::resource('vehicle-model', App\Http\Controllers\VehicleModelController::class);
 
 
 });

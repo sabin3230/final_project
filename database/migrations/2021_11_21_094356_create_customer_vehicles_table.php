@@ -16,15 +16,18 @@ class CreateCustomerVehiclesTable extends Migration
         Schema::create('customer_vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('vehicle_no', 100);
-            $table->year('model_no');
+            $table->year('model_year');
             $table->date('purchase_date');
             $table->String('chassis_no');
             $table->String('engine_no');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('customer_id')->unsigned();
+            $table->foreign('customer_id')
+                    ->references('id')
+                    ->on('customers')->onDelete('cascade');
             $table->bigInteger('vehicle_model_id')->unsigned();
             $table->foreign('vehicle_model_id')
                   ->references('id')
-                  ->on('customer_vehicles')->onDelete('cascade');
+                  ->on('vehicle_models')->onDelete('cascade');
             $table->timestamps();
         });
     }

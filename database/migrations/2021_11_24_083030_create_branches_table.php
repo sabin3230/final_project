@@ -15,10 +15,10 @@ class CreateBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('branch_name', 100);
-            $table->String('address');
+            $table->string('branch_name', 50);
+            $table->String('address',50);
             $table->String('email', 50 );
-            $table->String('contact'. 50);
+            $table->String('contact_no'. 50);
             $table->date('open_date');
             $table->boolean('status')->default(0);
             $table->String('slug', 50);

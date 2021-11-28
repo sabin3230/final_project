@@ -13,11 +13,11 @@
                 @csrf
                 @method('put')
                 <div class="form-group">
-                    <label for="permission">@lang('permission')</label>
+                    <label for="permission">Permission</label>
                     <input type="text" id="permission" name="permission" value="{{$permission->permission}}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="component">@lang('permission_component')</label>
+                    <label for="component">Permission Component</label>
                     <select name="component" id="component" class="form-control">
                         <option value="{{$permission->p_component_id}}">{{$permission->component->component}}</option>
                         @foreach ($p_components as $component)
@@ -28,7 +28,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit">@lang('update')</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>

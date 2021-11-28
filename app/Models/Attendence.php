@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Feedback extends Model
+class Attendence extends Model
 {
     use HasFactory;
-    protected $fillable =['id','customer_id','description'];
+    protected $fillable =['id','employee_id','date_time'];
 }

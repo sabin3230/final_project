@@ -38,7 +38,12 @@ class PermissionSeeder extends Seeder
             ['permission' => 'org-view', 'p_component_id' => 5],
             ['permission' => 'org-delete', 'p_component_id' => 5],
             ['permission' => 'org-edit', 'p_component_id' => 5],
-            ['permission' => 'org-action', 'p_component_id' => 5],
+            ['permission' => 'vehicle-model-action', 'p_component_id' => 6],
+            ['permission' => 'vehicle-model-add', 'p_component_id' => 6],
+            ['permission' => 'vehicle-model-view', 'p_component_id' => 6],
+            ['permission' => 'vehicle-model-edit', 'p_component_id' => 6],
+            ['permission' => 'vehicle-model-delete', 'p_component_id' => 6],
+
 
         ];
 

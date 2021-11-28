@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleModel extends Model
 {
     use HasFactory;
-
+    protected $fillable =['id', 'model_name', 'engine_capacity', 'color', 'organization_id'];
+   
     public function organization(){
-        $this->belongsTo(Organization::class);
+        return $this->belongsTo(Organization::class);
     }
 }
