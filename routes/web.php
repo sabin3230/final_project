@@ -28,6 +28,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     // dd();
     Route::resource('org', App\Http\Controllers\OrganizationController::class);
     Route::resource('vehicle-model', App\Http\Controllers\VehicleModelController::class);
+    // Route::resource('employee', App\Http\Controllers\EmployeeController::class);
+    Route::resource('branch', App\Http\Controllers\BranchController::class);
+    Route::resource('department', App\Http\Controllers\DepartmentController::class);
+    Route::resource('employee', App\Http\Controllers\EmployeeController::class);
+
 
 
 });

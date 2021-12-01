@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\department;
+use App\Models\Branch;
+use App\Models\Organization;
 use App\Http\Requests\StoredepartmentRequest;
 use App\Http\Requests\UpdatedepartmentRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +19,10 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        if(! Gate::allows('department-view')){
+            return abort(401);
+        }
+        return view('admin.department.index')->with('departments', Department::all());
     }
 
     /**
@@ -25,7 +32,10 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        if(! Gate::allows('department-add')){
+            return abort(401);
+        }
+        return view('admin.department.create');
     }
 
     /**
@@ -36,7 +46,13 @@ class DepartmentController extends Controller
      */
     public function store(StoredepartmentRequest $request)
     {
-        //
+        if(! Gate::allows('department-add')){
+            return abort(401);
+        }
+        $input = $request->all();
+        $input['slug']= Str::slug($input['department_name']);
+        Department::create($input);
+        return redirect()->route('department.index');
     }
 
     /**
@@ -56,9 +72,13 @@ class DepartmentController extends Controller
      * @param  \App\Models\department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(department $department)
+    public function edit($id)
     {
-        //
+        if(! Gate::allows('department-edit')){
+            return abort(401);
+        }
+        return view('admin.department.edit')->with('departments', Department::findOrFail($id));
+                                        
     }
 
     /**
@@ -68,19 +88,28 @@ class DepartmentController extends Controller
      * @param  \App\Models\department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatedepartmentRequest $request, department $department)
+    public function update(UpdatedepartmentRequest $request, $id)
     {
-        //
-    }
+        if(! Gate::allows('department-edit')){
+            return abort(401);
+        }
+        $department = Department::findOrFail($id);
+        $department->update($request->all());
+        return redirect()->route('department.index');
 
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(department $department)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('department-delete')){
+            return abort(401);
+        }
+        Department::find($id)->delete();
+        return redirect()->route('department.index');
     }
 }

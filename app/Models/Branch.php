@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
-    protected $fillable =['id','branch_name','addres','email','contact_no','open_date','status','slug','org_id'];
+    protected $fillable =['id','branch_name','address','email','contact_no','open_date','status','slug','org_id'];
 
-    public function organization()
+    public function organization(){
+        return $this->belongsTo(Organization::class, 'org_id');
+    }
+    public function departments()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsToMany(Department::class, 'branch_department');
     }
 }

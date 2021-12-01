@@ -1,13 +1,142 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use App\Models\Employee;
+use DB;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        return view('employee');
+        if(! Gate::allows('org-view')){
+            return abort(401);
+        }
+        return view('admin.employee.index')->with('employee', Employee::all());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        if(! Gate::allows('employee-add')){
+            return abort(401);
+        }
+        // dd(DB::table('roles')->where('role', 'Employee')->first());
+        return view('admin.employee.create')->with('departments', Department::all())->with('role', DB::table('roles')->where('role', 'Employee')->first());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreOrganizationRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        if(! Gate::allows('employee-add')){
+            return abort(401);
+        }
+        // dd($request);
+        
+        $user  = User::create([
+            'first_name'=> request('first_name'),
+            'last_name'=> request('last_name'),
+            'role_id'=>request('role_id'),
+            'address'=>request('address'),
+            'email'=>request('email'),
+            'contact'=>request('contact'),
+            'alt_contact'=>request('alt_contact'),
+            'password'=>Hash::make($request['password']),
+        ]);
+        
+        $employee = Employee::create([
+            'user_id' => $user->id,
+            'department_id' => request('department_id'),
+            'status' => request('status')
+        ]);
+        return redirect()->route('org.index');
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+       
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        if(! Gate::allows('org-edit')){
+            return abort(401);
+        }
+        // Organization::find($id)->edit();
+        return view('admin.organization.edit')->with('org', Organization::findOrFail($id));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateOrganizationRequest  $request
+     * @param  \App\Models\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateOrganizationRequest $request, $id)
+    {
+        if(! Gate::allows('org-edit')){
+            return abort(401);
+        }
+        $input = $request->all();
+        if ($image = $request->file('logo')) {
+            $destinationPath = 'admin_assets/images/';
+            $orgImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            // dd($orgImage);
+            $image->move($destinationPath, $orgImage);
+            $input['logo'] = "$orgImage";
+        }
+        // Organization::find($id)->edit();
+        $org = Organization::findOrFail($id);
+        $org->update($input);
+       
+
+        return redirect()->route('org.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Organization  $organization
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if(! Gate::allows('org-delete')){
+            return abort(401);
+        }
+        // dd($organization);
+        // dd($organization->find)
+        Organization::find($id)->delete();
+        return redirect()->route('org.index');
+
     }
 }

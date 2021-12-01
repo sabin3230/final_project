@@ -18,7 +18,7 @@ class CreateBranchesTable extends Migration
             $table->string('branch_name', 50);
             $table->String('address',50);
             $table->String('email', 50 );
-            $table->String('contact_no'. 50);
+            $table->String('contact_no', 50);
             $table->date('open_date');
             $table->boolean('status')->default(0);
             $table->String('slug', 50);

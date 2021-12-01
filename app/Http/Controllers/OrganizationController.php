@@ -117,8 +117,6 @@ class OrganizationController extends Controller
         // Organization::find($id)->edit();
         $org = Organization::findOrFail($id);
         $org->update($input);
-       
-
         return redirect()->route('org.index');
     }
 

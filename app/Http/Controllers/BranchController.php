@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\branch;
+use App\Models\Branch;
+use App\Models\Organization;
 use App\Http\Requests\StorebranchRequest;
 use App\Http\Requests\UpdatebranchRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class BranchController extends Controller
 {
@@ -15,7 +18,10 @@ class BranchController extends Controller
      */
     public function index()
     {
-        //
+        if(! Gate::allows('branch-view')){
+            return abort(401);
+        }
+        return view('admin.branch.index')->with('branchs', Branch::all());
     }
 
     /**
@@ -25,7 +31,10 @@ class BranchController extends Controller
      */
     public function create()
     {
-        //
+        if(! Gate::allows('branch-add')){
+            return abort(401);
+        }
+        return view('admin.branch.create')->with('organizations', Organization::all());
     }
 
     /**
@@ -36,7 +45,13 @@ class BranchController extends Controller
      */
     public function store(StorebranchRequest $request)
     {
-        //
+        if(! Gate::allows('branch-add')){
+            return abort(401);
+        }
+        $input = $request->all();
+        $input['slug']= Str::slug($input['branch_name']);
+        Branch::create($input);
+        return redirect()->route('branch.index');
     }
 
     /**
@@ -56,10 +71,15 @@ class BranchController extends Controller
      * @param  \App\Models\branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function edit(branch $branch)
+    public function edit($id)
     {
-        //
+        if(! Gate::allows('branch-edit')){
+            return abort(401);
+        }
+        return view('admin.branch.edit')->with('branchs', Branch::findOrFail($id))
+                                                ->with('organizations',Organization::all());
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -68,9 +88,15 @@ class BranchController extends Controller
      * @param  \App\Models\branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatebranchRequest $request, branch $branch)
+    public function update(UpdateBranchRequest $request, $id)
     {
-        //
+        if(! Gate::allows('branch-edit')){
+            return abort(401);
+        }
+        $branch = Branch::findOrFail($id);
+        $branch->update($request->all());
+        return redirect()->route('branch.index');
+
     }
 
     /**
@@ -79,8 +105,12 @@ class BranchController extends Controller
      * @param  \App\Models\branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function destroy(branch $branch)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('branch-delete')){
+            return abort(401);
+        }
+        Branch::find($id)->delete();
+        return redirect()->route('branch.index');
     }
 }

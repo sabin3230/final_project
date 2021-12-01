@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('nav-title')
-   Vehicle Model
+    Branch
 @endsection
 
 @section('content')
@@ -8,44 +8,50 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title mb-3">Vehicle Model</h3>
-                    <a href="{{route('vehicle-model.create')}}" class="btn btn-success mb-4 float-end">Create New</a>
+                    <h3 class="box-title mb-3">Branchs</h3>
+                    <a href="{{route('branch.create')}}" class="btn btn-success mb-4 float-end">Create New</a>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table id="dataList" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>Mode Name</th>
-                                <th>Engine Capacity</th>
-                                <th>Color</th> 
-                                <th>Organization</th>           
-                                @can('vehicle-model-action')
+                                <th>Branch Name</th>
+                                <th>Address</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Open Date</th>
+                                <th>Status</th>
+                            
+                                <th>Organization</th>
+                                @can('branch-action')
                                     <th>Action</th>
                                 @endcan
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($vehiclemodels->count() > 0)
+                            @if ($branchs->count() > 0)
                             @php($count  = 1)
-                                @foreach ($vehiclemodels as $vehicle_model)
+                                @foreach ($branchs as $branch)
                                     <tr>
                                         <td>{{$count}}</td>
-                                        <td>{{$vehicle_model->model_name}}</td>
-                                        <td>{{$vehicle_model->engine_capacity}}</td>
-                                        <td>{{$vehicle_model->color}}</td>
-                                        <td>{{$vehicle_model->organization->name}}</td>
-                                        
-                                        @can('vehicle-model-action')
+                                        <td>{{$branch->branch_name}}</td>
+                                        <td>{{$branch->address}}</td>
+                                        <td>{{$branch->contact}}</td>
+                                        <td>{{$branch->email}}</td>
+                                        <td>{{$branch->open_date}}</td>
+                                        <td>{{$branch->status}}</td>
+                                        <td>{{$branch->organization->name}}</td>
+                                        @can('branch-action')
                                             <td class="action" >
-                                                @can('vehicle-model-edit')
-                                                    <a href="{{route('vehicle-model.edit', $vehicle_model->id)}}" data-toggle="tooltip" title="edit" class="btn btn-info btn-sm mb-1">
+                                                @can('branch-edit')
+                                                    <a href="{{route('branch.edit', $branch->id)}}" data-toggle="tooltip" title="edit" class="btn btn-info btn-sm mb-1">
                                                         <i class="far fa-edit"></i>
                                                     </a>
                                                 @endcan
                                                 <!-- <br> -->
-                                                @can('vehicle-model-delete')
-                                                    <form action="{{route('vehicle-model.destroy', ['vehicle_model' => $vehicle_model->id])}}" method="post" >
+                                                @can('branch-delete')
+                                                    <form action="{{route('branch.destroy', ['branch' => $branch->id])}}" method="post" >
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete">

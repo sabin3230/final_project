@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
         Role::truncate();
         $items = [
             ['id' => 1, 'role' => 'admin'],
-            ['id' => 2, 'role' => 'employee'],
+            ['id' => 2, 'role' => 'Employee'],
             
         ];
         //inserts data in items to database

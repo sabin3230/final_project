@@ -35,7 +35,7 @@ class VehicleModelController extends Controller
         }
         return view('admin.vehicle_model.create')->with('organizations', Organization::all());
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -49,6 +49,9 @@ class VehicleModelController extends Controller
         if(! Gate::allows('vehicle-model-add')){
             return abort(401);
         }
+        // dd($request->all());
+        VehicleModel::create($request->all());
+        return redirect()->route('vehicle-model.index');
     }
 
     /**
@@ -68,12 +71,13 @@ class VehicleModelController extends Controller
      * @param  \App\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(VehicleModel $vehicleModel)
+    public function edit($id)
     {
         if(! Gate::allows('vehicle-model-edit')){
             return abort(401);
         }
-        return view('admin.vehicle_model.edit')->with('vehiclemodels', VehicleModel::all());
+        return view('admin.vehicle_model.edit')->with('vehiclemodel', VehicleModel::findOrFail($id))
+                                                ->with('organizations',Organization::all());
     }
 
     /**
@@ -83,9 +87,14 @@ class VehicleModelController extends Controller
      * @param  \App\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVehicleModelRequest $request, VehicleModel $vehicleModel)
+    public function update(UpdateVehicleModelRequest $request,$id)
     {
-        //
+        if(! Gate::allows('vehicle-model-edit')){
+            return abort(401);
+        }
+        $vehiclemodel = vehicleModel::findOrFail($id);
+        $vehiclemodel->update($request->all());
+        return redirect()->route('vehicle-model.index');
     }
 
     /**
@@ -94,8 +103,12 @@ class VehicleModelController extends Controller
      * @param  \App\Models\VehicleModel  $vehicleModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VehicleModel $vehicleModel)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('vehicle-model-delete')){
+            return abort(401);
+        }
+        VehicleModel::find($id)->delete();
+        return redirect()->route('vehicle-model.index');
     }
 }
