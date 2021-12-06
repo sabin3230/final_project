@@ -15,10 +15,10 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        if(! Gate::allows('org-view')){
+        if(! Gate::allows('employee-view')){
             return abort(401);
         }
-        return view('admin.employee.index')->with('employee', Employee::all());
+        return view('admin.employee.index')->with('employees', Employee::all());
     }
 
     /**
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
             'department_id' => request('department_id'),
             'status' => request('status')
         ]);
-        return redirect()->route('org.index');
+        return redirect()->route('employee.index');
 
     }
 
@@ -87,11 +87,11 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        if(! Gate::allows('org-edit')){
+        if(! Gate::allows('employee-edit')){
             return abort(401);
         }
-        // Organization::find($id)->edit();
-        return view('admin.organization.edit')->with('org', Organization::findOrFail($id));
+        $employee = Employee::find($id);
+        return view('admin.employee.edit')->with('departments', Department::all())->with('employee', $employee);
     }
 
     /**
@@ -103,23 +103,13 @@ class EmployeeController extends Controller
      */
     public function update(UpdateOrganizationRequest $request, $id)
     {
-        if(! Gate::allows('org-edit')){
+        if(! Gate::allows('employee-edit')){
             return abort(401);
         }
-        $input = $request->all();
-        if ($image = $request->file('logo')) {
-            $destinationPath = 'admin_assets/images/';
-            $orgImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            // dd($orgImage);
-            $image->move($destinationPath, $orgImage);
-            $input['logo'] = "$orgImage";
-        }
-        // Organization::find($id)->edit();
-        $org = Organization::findOrFail($id);
-        $org->update($input);
-       
-
-        return redirect()->route('org.index');
+    
+        $employee = Employee::findOrFail($id);
+        $employee->update($input);
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -130,13 +120,11 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        if(! Gate::allows('org-delete')){
+        if(! Gate::allows('employee-delete')){
             return abort(401);
         }
-        // dd($organization);
-        // dd($organization->find)
-        Organization::find($id)->delete();
-        return redirect()->route('org.index');
+        Employee::find($id)->delete();
+        return redirect()->route('employee.index');
 
     }
 }

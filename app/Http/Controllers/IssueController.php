@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Issue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class IssueController extends Controller
 {
@@ -14,7 +15,10 @@ class IssueController extends Controller
      */
     public function index()
     {
-        //
+        if(! Gate::allows('issue-view')){
+            return abort(401);
+        }
+        return view('admin.organization.index')->with('orgs', Issue::all());
     }
 
     /**
@@ -24,7 +28,10 @@ class IssueController extends Controller
      */
     public function create()
     {
-        //
+        if(! Gate::allows('issue-view')){
+            return abort(401);
+        }
+        return view('admin.issues.create')->with('issues', Issue::all());
     }
 
     /**

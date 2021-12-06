@@ -17,7 +17,12 @@
                             <tr>
                                 <th>SN</th>
                                 <th>Department_id</th>
-                                <th>User_id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Alternate Contact</th>
                                 @can('employee-action')
                                     <th>Action</th>
                                 @endcan
@@ -30,7 +35,12 @@
                                     <tr>
                                         <td>{{$count}}</td>
                                         <td>{{$employee->department_id}}</td>
-                                        <td>{{employee->user_id}}</td>
+                                        <td>{{$employee->user->first_name}}</td>
+                                        <td>{{$employee->user->last_name}}</td>
+                                        <td>{{$employee->user->address}}</td>
+                                        <td>{{$employee->user->email}}</td>
+                                        <td>{{$employee->user->contact}}</td>
+                                        <td>{{$employee->user->alt_contact}}</td>
                                         
                                         @can('employee-action')
                                             <td class="action" >

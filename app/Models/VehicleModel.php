@@ -13,4 +13,8 @@ class VehicleModel extends Model
     public function organization(){
         return $this->belongsTo(Organization::class);
     }
+
+    public function CustomerVehicle(){
+        return $this->hasMany(CustomerVehicle::class);
+    }
 }

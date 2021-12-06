@@ -9,4 +9,13 @@ class Servicing extends Model
 {
     use HasFactory;
     protected $fillable =['id', 'assign_to', 'start_time', 'end_time', 'remarks', 'next_servicing', 'booking_id', 'employee_id'];
+
+    public function employees(){
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function bookings(){
+        return $this->belongsTo(Booking::class);
+    }
+
 }

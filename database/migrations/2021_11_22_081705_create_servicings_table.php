@@ -15,6 +15,7 @@ class CreateServicingsTable extends Migration
     {
         Schema::create('servicings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('assign_to' 200);
             $table->time('start_time');
             $table->time('end_time');
             $table->string('remarks', 50);

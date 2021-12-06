@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-    protected $fillable =['id', 'first_name', 'last_name', 'address', 'email', 'contact', 'alt_contact'];
+    protected $fillable =['id', 'user_id'];
+
+    public function customerVehicles(){
+        return $this->hasMany(CustomerVehicle::class);
+    }
+    public function user(){
+        // dd($this->belongsTo(User::class, 'user_id'));
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -20,6 +20,8 @@ class RoleSeeder extends Seeder
         $items = [
             ['id' => 1, 'role' => 'admin'],
             ['id' => 2, 'role' => 'Employee'],
+            ['id' => 3, 'role' => 'Customer'],
+
             
         ];
         //inserts data in items to database

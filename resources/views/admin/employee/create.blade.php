@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" class="form-control">
+                    <input type="email" name="email" id="email" class="form-control">
                 </div>
                 
                 <div class="form-group">
@@ -52,7 +52,9 @@
                 <div class="form-group">
                 <label for="department">Department</label>
                     <select name="department_id" id="" class="form-control">
-                        <option value="">-------</option>
+                        <option value="">Maintance</option>
+                        <option value="">Staff</option>
+                        <option value="">Sales</option>
                         @foreach($departments as $department)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
                         @endforeach
@@ -70,10 +72,10 @@
 
                 
                
-            </div><!-- /.box-body -->
+            </div>
             <div class="box-footer mt-4">
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </form>
-    </div><!--Permission Component Create Box Ends Here-->
+    </div>
 @endsection

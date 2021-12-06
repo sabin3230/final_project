@@ -52,8 +52,3 @@
         </form>
     </div><!--Permission Component Create Box Ends Here-->
 @endsection
-@section('js')
-<script>
-
-</script>
-@endsection
