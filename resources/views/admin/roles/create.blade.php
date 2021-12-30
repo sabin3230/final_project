@@ -18,7 +18,7 @@
                 <div class="row">
                     @foreach ($p_components as $component)
                         <div class="col-md-4">
-                            <label for="">{{$component->component}} @lang('')</label>
+                            <label for="">{{$component->component}}</label>
                             @foreach ($permissions as $permission)
                                 @if ($permission->p_component_id == $component->id)
                                     <div class='checkbox'>

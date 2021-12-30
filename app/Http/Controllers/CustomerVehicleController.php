@@ -36,6 +36,7 @@ class CustomerVehicleController extends Controller
         if(! Gate::allows('customer-vehicle-add')){
             return abort(401);
         }
+        
         return view('customer.customer_vehicle.create')->with('vehicle_models', VehicleModel::all());
     }
 
@@ -54,7 +55,7 @@ class CustomerVehicleController extends Controller
         // dd(Auth::user()->customer->id);
         $request["customer_id"]=Auth::user()->customer->id;
         CustomerVehicle::create($request->all());
-        return redirect()->route('customer-vehicle.index');
+        return redirect()->route('customer_vehicle.index');
     }
 
     /**
@@ -97,7 +98,7 @@ class CustomerVehicleController extends Controller
         }
         $customerVehcile = CustomerVehicle::findOrFail($id);
         $customerVehcile->update($request->all());
-        return redirect()->route('customer-vehicle.index');
+        return redirect()->route('customer_vehicle.index');
     }
 
     /**
@@ -112,6 +113,6 @@ class CustomerVehicleController extends Controller
             return abort(401);
         }
         $customerVehicle->delete();
-        return redirect()->route('customer-vehicle.index');
+        return redirect()->route('customer_vehicle.index');
     }
 }

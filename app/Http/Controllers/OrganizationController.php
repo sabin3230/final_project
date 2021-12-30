@@ -90,7 +90,7 @@ class OrganizationController extends Controller
         if(! Gate::allows('org-edit')){
             return abort(401);
         }
-        // Organization::find($id)->edit();
+
         return view('admin.organization.edit')->with('org', Organization::findOrFail($id));
     }
 
@@ -114,7 +114,7 @@ class OrganizationController extends Controller
             $image->move($destinationPath, $orgImage);
             $input['logo'] = "$orgImage";
         }
-        // Organization::find($id)->edit();
+
         $org = Organization::findOrFail($id);
         $org->update($input);
         return redirect()->route('org.index');
@@ -131,8 +131,6 @@ class OrganizationController extends Controller
         if(! Gate::allows('org-delete')){
             return abort(401);
         }
-        // dd($organization);
-        // dd($organization->find)
         Organization::find($id)->delete();
         return redirect()->route('org.index');
 

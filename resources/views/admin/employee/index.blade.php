@@ -16,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>Department_id</th>
+                                <th>Department</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Address</th>
@@ -34,13 +34,14 @@
                                 @foreach ($employees as $employee)
                                     <tr>
                                         <td>{{$count}}</td>
-                                        <td>{{$employee->department_id}}</td>
+                                        <td>{{$employee->department->department_name}}</td>
                                         <td>{{$employee->user->first_name}}</td>
                                         <td>{{$employee->user->last_name}}</td>
                                         <td>{{$employee->user->address}}</td>
                                         <td>{{$employee->user->email}}</td>
                                         <td>{{$employee->user->contact}}</td>
                                         <td>{{$employee->user->alt_contact}}</td>
+                                        
                                         
                                         @can('employee-action')
                                             <td class="action" >

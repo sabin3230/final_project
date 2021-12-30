@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bookingIssue;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class BookingIssueController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class BookingIssueController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\bookingIssue  $bookingIssue
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(bookingIssue $bookingIssue)
+    public function show(Contact $contact)
     {
         //
     }
@@ -52,10 +52,10 @@ class BookingIssueController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\bookingIssue  $bookingIssue
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(bookingIssue $bookingIssue)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -64,10 +64,10 @@ class BookingIssueController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\bookingIssue  $bookingIssue
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, bookingIssue $bookingIssue)
+    public function update(Request $request, Contact $contact)
     {
         //
     }
@@ -75,10 +75,10 @@ class BookingIssueController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\bookingIssue  $bookingIssue
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(bookingIssue $bookingIssue)
+    public function destroy(Contact $contact)
     {
         //
     }

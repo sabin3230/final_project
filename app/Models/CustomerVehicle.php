@@ -17,4 +17,8 @@ class CustomerVehicle extends Model
     public function vehiclemodels(){
         return $this->belongsTo(VehicleModel::class, 'vehicle_model_id');
     }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 }

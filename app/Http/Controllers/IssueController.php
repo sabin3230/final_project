@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Issue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-
+use DB;
 class IssueController extends Controller
 {
     /**
@@ -18,7 +18,7 @@ class IssueController extends Controller
         if(! Gate::allows('issue-view')){
             return abort(401);
         }
-        return view('admin.organization.index')->with('orgs', Issue::all());
+        return view('admin.issue.index')->with('issues', Issue::all());
     }
 
     /**
@@ -28,10 +28,11 @@ class IssueController extends Controller
      */
     public function create()
     {
-        if(! Gate::allows('issue-view')){
+        if(! Gate::allows('issue-add')){
             return abort(401);
         }
-        return view('admin.issues.create')->with('issues', Issue::all());
+        // dd(DB::table('issues')->where('parent_id', null)->get());
+        return view('admin.issue.create')->with('issues', DB::table('issues')->where('parent_id', null)->get());
     }
 
     /**
@@ -42,7 +43,11 @@ class IssueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(! Gate::allows('issue-add')){
+            return abort(401);
+        }
+        Issue::create($request->all());
+        return redirect()->route('issue.index');
     }
 
     /**
@@ -62,9 +67,13 @@ class IssueController extends Controller
      * @param  \App\Models\Issue  $issue
      * @return \Illuminate\Http\Response
      */
-    public function edit(Issue $issue)
+    public function edit($id)
     {
-        //
+        if(! Gate::allows('issue-edit')){
+            return abort(401);
+        }
+        $i = Issue::find($id);
+        return view('admin.issue.edit')->with('issue', Issue::findOrFail($id))->with('issues', DB::table('issues')->where('parent_id', null)->get());
     }
 
     /**
@@ -74,9 +83,15 @@ class IssueController extends Controller
      * @param  \App\Models\Issue  $issue
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Issue $issue)
+    public function update(Request $request, $id)
     {
-        //
+        if(! Gate::allows('issue-edit')){
+            return abort(401);
+        }
+        $issue = Issue::findOrFail($id);
+        $issue->update($request->all());
+        return redirect()->route('issue.index');
+
     }
 
     /**
@@ -87,6 +102,10 @@ class IssueController extends Controller
      */
     public function destroy(Issue $issue)
     {
-        //
+        if(! Gate::allows('issue-delete')){
+            return abort(401);
+        }
+        Issue::find($id)->delete();
+        return redirect()->route('issue.index');
     }
 }

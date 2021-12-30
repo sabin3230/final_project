@@ -42,3 +42,23 @@ overflow-y: hidden;
     padding:15px;
 }
 
+header{
+    z-index: 100;
+    width: 100%;
+}
+
+
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 65%!important;
+    }
+}
+
+
+.imagebackground{
+    height: 200px;
+    width: 100%;
+    background-image: url("admin_assets/images/");
+    background-color: blueviolet;
+}

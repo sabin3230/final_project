@@ -17,12 +17,15 @@
                     <input type="text" name="issue" id="issue"  class="form-control">
                 </div>
        
-
-                <select name="parent_id" id="">
+            
+                <label for="">Parent Issue</label>
+                <select name="parent_id" class ='form-control'id="">
                     <option value="">-------</option>
-                    @foreach($issues as $issue)
-                        <option value="{{$issue->id}}">{{$issue->issue}}</option>
-                    @endforeach
+                    @if ($issues->count() > 0)
+                        @foreach($issues as $issue)
+                            <option value="{{$issue->id}}">{{$issue->issue}}</option>
+                        @endforeach
+                    @endif
                 </select>
             <div class="box-footer">
                 <button type="submit" class="btn btn-success mt-4">Submit</button>

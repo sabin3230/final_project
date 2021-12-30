@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Employee;
 use DB;
 
 class UserSeeder extends Seeder
@@ -17,6 +18,7 @@ class UserSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         User::truncate();
+        Employee::truncate();
         $items = [
             [
                 'first_name'=>'admin', 
@@ -35,7 +37,7 @@ class UserSeeder extends Seeder
                 'contact'=>'4566',
                 'email' => 'c@c.com', 
                 'password' => bcrypt('hello123'), 
-                'role_id' => 1,
+                'role_id' => 3,
                 
             ],
         ];

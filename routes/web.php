@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class,'index']);
+Route::get('/bookingvehicle', [App\Http\Controllers\VehicleBookingController::class,'index']);
+
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -33,13 +35,29 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('employee', App\Http\Controllers\EmployeeController::class);
     Route::resource('customer', App\Http\Controllers\CustomerController::class);
     Route::resource('issue', App\Http\Controllers\IssueController::class);
+    Route::resource('booking', App\Http\Controllers\BookingController::class);  
+
+
+
+    Route::resource('servicing', App\Http\Controllers\ServicingController::class);  
+    Route::post('servicing/assign/{id}',[App\Http\Controllers\ServicingController::class,'assignEmployee'])->name('servicing.assign');
+    Route::post('servicing/start/{id}',[App\Http\Controllers\ServicingController::class,'getStartTask'])->name('servicing.start');
+    Route::post('servicing/end/{id}',[App\Http\Controllers\ServicingController::class,'completeService'])->name('servicing.complete');
+    Route::post('servicing/issue/{id}',[App\Http\Controllers\ServicingController::class,'checkIssue'])->name('servicing.issue');
+    Route::post('servicing/issue/remarks/{id}',[App\Http\Controllers\ServicingController::class,'servicingRemarks'])->name('servicing.remarks');
+
+    
 
 
 
 });
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('customer-vehicle', App\Http\Controllers\CustomerVehicleController::class);
 
+
+Route::group(['prefix' => 'customer','middleware' => 'auth'], function () {
+    Route::resource('customer-vehicle', App\Http\Controllers\CustomerVehicleController::class);
+    Route::resource('booking', App\Http\Controllers\BookingController::class);  
+    Route::get('/dashboard',[App\Http\Controllers\CustomerController::class,'customerDashboard'])->name('customer-dashboard');
+    Route::get('/profile',[App\Http\Controllers\CustomerController::class,'customerProfile'])->name('profile');
 });
 
 // Auth::routes();

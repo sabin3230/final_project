@@ -62,7 +62,7 @@ class EmployeeController extends Controller
         $employee = Employee::create([
             'user_id' => $user->id,
             'department_id' => request('department_id'),
-            'status' => request('status')
+            'status' => request('status'),
         ]);
         return redirect()->route('employee.index');
 
@@ -101,14 +101,30 @@ class EmployeeController extends Controller
      * @param  \App\Models\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrganizationRequest $request, $id)
+    public function update(Request $request, $id)
     {
         if(! Gate::allows('employee-edit')){
             return abort(401);
         }
     
         $employee = Employee::findOrFail($id);
-        $employee->update($input);
+        $user=$employee->user;
+        $user->update([
+            'first_name'=> request('first_name'),
+            'last_name'=> request('last_name'),
+            'role_id'=>request('role_id'),
+            'address'=>request('address'),
+            'email'=>request('email'),
+            'contact'=>request('contact'),
+            'alt_contact'=>request('alt_contact'),
+        ]);
+        
+        $employee->update([
+            'user_id' => $user->id,
+            'department_id' => request('department_id'),
+            'status' => request('status')
+        ]);
+        // $employee->update($input);
         return redirect()->route('employee.index');
     }
 

@@ -52,9 +52,8 @@
                 <div class="form-group">
                 <label for="department">Department</label>
                     <select name="department_id" id="" class="form-control">
-                        <option value="">Maintance</option>
-                        <option value="">Staff</option>
-                        <option value="">Sales</option>
+                        <option value="" disabled>-------------</option>
+                    
                         @foreach($departments as $department)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
                         @endforeach

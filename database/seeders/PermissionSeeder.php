@@ -34,6 +34,7 @@ class PermissionSeeder extends Seeder
             ['permission' => 'permission-delete', 'p_component_id' => 3 ],
             ['permission' => 'permission-action', 'p_component_id' => 3 ],
             ['permission' => 'permission_comp_add', 'p_component_id' => 4],
+            ['permission' => 'org-action', 'p_component_id' => 5 ],
             ['permission' => 'org-add', 'p_component_id' => 5],
             ['permission' => 'org-view', 'p_component_id' => 5],
             ['permission' => 'org-delete', 'p_component_id' => 5],
@@ -78,6 +79,11 @@ class PermissionSeeder extends Seeder
             ['permission' => 'issue-view', 'p_component_id' => 13],
             ['permission' => 'issue-edit', 'p_component_id' => 13],
             ['permission' => 'issue-delete', 'p_component_id' => 13],
+            ['permission' => 'servicing-action', 'p_component_id' => 14],
+            ['permission' => 'servicing-add', 'p_component_id' => 14],
+            ['permission' => 'servicing-view', 'p_component_id' => 14],
+            ['permission' => 'servicing-edit', 'p_component_id' => 14],
+            ['permission' => 'servicing-delete', 'p_component_id' => 14],
 
 
 

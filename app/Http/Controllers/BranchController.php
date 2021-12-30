@@ -48,9 +48,7 @@ class BranchController extends Controller
         if(! Gate::allows('branch-add')){
             return abort(401);
         }
-        $input = $request->all();
-        $input['slug']= Str::slug($input['branch_name']);
-        Branch::create($input);
+        Branch::create($request->all());
         return redirect()->route('branch.index');
     }
 

@@ -12,12 +12,19 @@ class Issue extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Issue::class,'parent_id')->where('parent_id',0);
+        return $this->belongsTo(Issue::class,'parent_id','id');
     }
 
     public function children()
     {
         return $this->hasMany(Issue::class,'parent_id');
     }
+
+    public function booking()
+    {
+        return $this->belongsToMany(Booking::class, 'booking_issues');
+    }
+
+    
 
 }

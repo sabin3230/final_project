@@ -22,42 +22,120 @@
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
+                        @can('role-access')
+                            <li>
+                                <a href="{{route('role.index')}}" class="nav-link text-white">
+                                <i class="fas fa-address-card"></i>
+                                <span>Role Management</span>
+                                </a>
+                            </li>
+                            
+                        @endcan
+                        @can('permission-access')
+                            <li>
+                                <a href="{{route('permission.index')}}" class="nav-link text-white">
+                                <i class="fas fa-address-card"></i>
+                                <span>Permission Management</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('p_component.index')}}" class="nav-link text-white">
+                                <i class="fas fa-address-card"></i>
+                                <span>Permission component Management</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('employee-view')
+                            <li>
+                                <a href="{{route('employee.index')}}" class="nav-link text-white">
+                                <i class="fas fa-users"></i>
+                                <span class="pl-4">Employees</span>
+                                </a>
+                            </li>
+                        @endcan
                         <li>
-                            <a href="#" class="nav-link text-white">
-                            <i class="fas fa-address-card"></i>
-                            <span>user profile</span>
-                            </a>
-                        </li>
+                            
+                        @can('customer-view')
+                            
+                            <li>
+                                <a href="{{route('customer.index')}}" class="nav-link text-white">
+                                <i class="fas fa-address-card"></i>
+                                <span>Customer</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('org-view')
                         <li>
-                            <a href="#" class="nav-link text-white">
-                            <i class="fas fa-users"></i>
-                            <span class="pl-4">Employees</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
-                            <i class="fas fa-address-card"></i>
-                            <span>Customer</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
+                            <a href="{{route('org.index')}}" class="nav-link text-white">
                             <i class="fas fa-building"></i>
-                            <span><a href="{{route('org.index') }}">Organization</a></span>
+                            <span>Organization Info</span>
                             </a>
                         </li>
+                        @endcan
+
+                        @can('branch-view')
                         <li>
-                            <a href="#" class="nav-link text-white">
+                            <a href="{{route('branch.index')}}" class="nav-link text-white">
+                            <i class="fas fa-building"></i>
+                            <span>Branches </span>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('department-view')
+                        <li>
+                            <a href="{{route('department.index')}}" class="nav-link text-white">
+                            <i class="fas fa-building"></i>
+                            <span>Departments </span>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('servicing-view')
+                        <li>
+                            <a href="{{route('servicing.index')}}" class="nav-link text-white">
                             <i class="fas fa-biking"></i>
                             <span> Servicing</span>
                             </a>
                         </li>
+                        @endcan
+
+                        @can('booking-view')
                         <li>
-                            <a href="#" class="nav-link text-white">
-                            <i class="fas fa-comments"></i>
-                            <span>Feedback</span>
+                            <a href="{{route('booking.index')}}" class="nav-link text-white">
+                            <i class="fas fa-biking"></i>
+                            <span> Bookings</span>
                             </a>
                         </li>
+                        @endcan
+
+
+                        @can('vehicle-model-view')
+                        <li>
+                            <a href="{{route('vehicle-model.index')}}" class="nav-link text-white">
+                            <i class="fas fa-biking"></i>
+                            <span> Vehicle Model</span>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('issue-view')
+                            <li>
+                                <a href="{{route('issue.index')}}" class="nav-link text-white">
+                                <i class="fas fa-biking"></i>
+                                <span> Issues</span>
+                                </a>
+                            </li>
+                        @endcan
+                        
+                        @can('feedback-view')
+                            <li>
+                                <a href="{{route('feecback.index')}}" class="nav-link text-white">
+                                <i class="fas fa-comments"></i>
+                                <span>Feedback</span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                     <div class="user-profile">
                         <hr>
@@ -115,9 +193,8 @@
 </div>
     
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/1aea98032a.js" crossorigin="anonymous"></script>
 @yield('js')
 </html>

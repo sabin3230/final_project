@@ -14,7 +14,6 @@ class CreateBookingIssuesTable extends Migration
     public function up()
     {
         Schema::create('booking_issues', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->bigInteger('booking_id')->unsigned();
             $table->foreign('booking_id')
                     ->references('id')
@@ -23,7 +22,6 @@ class CreateBookingIssuesTable extends Migration
             $table->foreign('issue_id')
                   ->references('id')
                   ->on('issues')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

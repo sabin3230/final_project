@@ -6,8 +6,9 @@
             <h3 class="box-title">Edit</h3>
         </div>
         <!--form start-->
-        <form action="{{route('employee.store')}}" method="post" role="form" class="">
+        <form action="{{route('employee.update',['employee' => $employee->id])}}" method="post" role="form" class="">
             @csrf
+            @method('put')
             <div class="box-body">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
@@ -40,9 +41,9 @@
                 </div>
 
                 
-
-                <select name="department_id" id="">
-                    <option value="{{$employee->department->id}}">{{$employee->department->department_name}} Department</option>
+                <label for="">Department</label>
+                <select name="department_id" id="" class="form-control">
+                    <option value="{{$employee->department->id}}">{{$employee->department->department_name}}</option>
                     @foreach($departments as $department)
                         @if($employee->department->id != $department->id)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>

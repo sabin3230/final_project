@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->date('booking_date');
             $table->time('booking_time');
             $table->string('completed_km');
+            $table->string('description');
             $table->bigInteger('customer_vehicle_id')->unsigned();
             $table->foreign('customer_vehicle_id')
                   ->references('id')

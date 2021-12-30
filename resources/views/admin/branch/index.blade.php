@@ -37,7 +37,7 @@
                                         <td>{{$count}}</td>
                                         <td>{{$branch->branch_name}}</td>
                                         <td>{{$branch->address}}</td>
-                                        <td>{{$branch->contact}}</td>
+                                        <td>{{$branch->contact_no}}</td>
                                         <td>{{$branch->email}}</td>
                                         <td>{{$branch->open_date}}</td>
                                         <td>{{$branch->status}}</td>

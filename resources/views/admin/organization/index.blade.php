@@ -55,7 +55,7 @@
                                                         <i class="far fa-edit"></i>
                                                     </a>
                                                 @endcan
-                                                <!-- <br> -->
+                                           
                                                 @can('org-delete')
                                                     <form action="{{route('org.destroy', ['org' => $org->id])}}" method="post" >
                                                         @csrf

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('contact', 10);
             $table->string('alt_contact', 10)->nullable();
-            $table->string('address', 10)->nullable();
+            $table->string('address');
 
             // $table->bigInteger('role_id')->unsigned();
             $table->rememberToken();

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\CustomerVehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class BookingController extends Controller
 {
@@ -14,7 +18,20 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        if(! Gate::allows('booking-view')){
+            return abort(401);
+        }
+        $user = Auth::user();
+        $user_role = $user->role_id;
+        if($user_role == 1){
+            return view('admin.booking.index')->with('bookings', Booking::all());
+        }else if($user_role == 3){
+            $customer_id = $user->customer->id;
+            $customer_vehicles = CustomerVehicle::select('id')->where('customer_id', $customer_id)->get();
+            $bookings = DB::table('bookings')->whereIn('customer_vehicle_id', $customer_vehicles)->get();
+            return view('customer.booking.index')->with('bookings', $bookings);
+        }
+        
     }
 
     /**
@@ -24,7 +41,12 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        if(! Gate::allows('booking-add')){
+            return abort(401);
+        }
+        $user = Auth::user();
+        $customerVehicles = $user->customer->customerVehicles;
+        return view('customer.booking.create')->with('bookings', Booking::all())->with('customerVehicles', $customerVehicles);
     }
 
     /**
@@ -35,7 +57,19 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(! Gate::allows('booking-add')){
+            return abort(401);
+        }
+        // dd($request->all());
+        $booking = Booking::create([
+            'customer_vehicle_id'=>request('customer_vehicle_id'),
+            'completed_km'=>request('completed_km'),
+            'booking_date'=>request('booking_date'),
+            'booking_time'=>request('booking_time'),
+            'description'=>request('description'),
+        ]);
+        $booking->issues()->sync($request->issues);
+        return redirect()->route('customer-dashboard');
     }
 
     /**
@@ -78,8 +112,12 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('booking-delete')){
+            return abort(401);
+        }
+        Booking::find($id)->delete();
+        return redirect()->route('booking.index');
     }
 }
