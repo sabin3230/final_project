@@ -4,7 +4,7 @@
     <!--Permission Edit Box Starts Here-->
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">@lang('edit') @lang('permission'): {{$permission->permission}}</h3>
+            <h3 class="box-title">Edit Permission: {{$permission->permission}}</h3>
         </div>
         <!--Box Body-->
         <div class="box-body">
@@ -28,7 +28,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Update</button>
+                    <button class="btn btn-success" type="submit" style="margin-top: 20px">Update</button>
                 </div>
             </form>
         </div>

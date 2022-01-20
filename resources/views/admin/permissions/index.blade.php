@@ -1,25 +1,29 @@
 @extends('layouts.admin')
+@section('title')
+    Permission
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">@lang('title')</h3>
-                    <a href="{{route('permission.create')}}" class="btn btn-success pull-right">@lang('new')</a>
+                <div class="box-header d-flex">
+                    <h3 class="box-title">Permissions</h3>
+                    <a href="{{route('permission.create')}}" class="btn btn-success pull-right">Create New</a>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         @foreach ($p_components as $p_component)
                             <div class="col-md-6 col-sm-12">
-                                <h4 class="component-title">{{$p_component->component}} @lang('')</h4>
+                                <h4 class="component-title">{{$p_component->component}} Component</h4>
                                 <table id="" class="table table-bordered table-hover table-striped" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>SN</th>
                                             <th>Permission</th>
-                                            <th>@lang('created')</th>
+                                            <th>Create</th>
                                             @can('permission-action')
-                                                <th>@lang('action')</th>
+                                                <th>Action</th>
                                             @endcan
                                         </tr>
                                     </thead>
@@ -35,7 +39,7 @@
                                                         @can('permission-action')
                                                             <td class="action">
                                                                 @can('permission-edit')
-                                                                    <a href="{{route('permission.edit', ['permission' => $permission->id])}}" data-toggle="tooltip" title="@lang('global.app_edit')" class="btn btn-info btn-sm">
+                                                                    <a href="{{route('permission.edit', ['permission' => $permission->id])}}" data-toggle="tooltip"  class="btn btn-info btn-sm">
                                                                         <i class="far fa-edit"></i>
                                                                     </a>
                                                                 @endcan
@@ -43,7 +47,7 @@
                                                                     <form action="{{route('permission.destroy', ['permission' => $permission->id])}}" method="post">
                                                                         @csrf
                                                                         @method('delete')
-                                                                        <button type="submit" data-toggle="tooltip" title="@lang('global.app_trash')" class="btn btn-danger btn-sm">
+                                                                        <button type="submit" data-toggle="tooltip"  class="btn btn-danger btn-sm">
                                                                             <i class="far fa-trash-alt"></i>
                                                                         </button>
                                                                     </form>
@@ -57,7 +61,7 @@
                                             @endforeach
                                         @else
                                             <tr>
-                                                <th colspan="4" class="text-center"><i>@lang('no_entries_in_table')</i></th>
+                                                <th colspan="4" class="text-center"><i>No Entries in the table!!!</i></th>
                                             </tr>
                                         @endif
                                     </tbody>

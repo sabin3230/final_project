@@ -14,7 +14,7 @@ class AttendenceController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

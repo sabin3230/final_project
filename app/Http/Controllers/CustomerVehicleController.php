@@ -55,7 +55,8 @@ class CustomerVehicleController extends Controller
         // dd(Auth::user()->customer->id);
         $request["customer_id"]=Auth::user()->customer->id;
         CustomerVehicle::create($request->all());
-        return redirect()->route('customer_vehicle.index');
+
+        return redirect()->route('customer-dashboard');
     }
 
     /**

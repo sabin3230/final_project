@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\feedback;
 use App\Http\Requests\StorefeedbackRequest;
 use App\Http\Requests\UpdatefeedbackRequest;
+use Illuminate\Support\Facades\Gate;
 
 class FeedbackController extends Controller
 {
@@ -15,7 +16,12 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        return view('feedback');
+
+        if(! Gate::allows('feedback-view')){
+            return abort(401);
+        }
+
+        return view('admin.feedback')->with('feedbacks', Feedback::all());;
     }
 
     /**
@@ -36,7 +42,12 @@ class FeedbackController extends Controller
      */
     public function store(StorefeedbackRequest $request)
     {
-        //
+        if(! Gate::allows('feedback-add')){
+            return abort(401);
+        }
+
+        Feedback::create($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -79,8 +90,12 @@ class FeedbackController extends Controller
      * @param  \App\Models\feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function destroy(feedback $feedback)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('feedback-delete')){
+            return abort(401);
+        }
+        Feedback::find($id)->delete();
+        return redirect()->route('admin.feedback');
     }
 }

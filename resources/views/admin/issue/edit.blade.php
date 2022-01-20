@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('nav-title')
-    issue
+@section('title')
+    Edit {{$issue->parent->issue}}
 @endsection
 
 @section('content')
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Edit</h3>
+                <h3 class="box-title">Edit: {{$issue->parent->issue}}</h3>
             </div>
             <!--form start-->
             <form action="{{route('issue.update', ['issue' => $issue->id])}}" method="post" role="form" enctype="multipart/form-data">
@@ -32,7 +32,7 @@
                     </select>
     
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-success">update</button>
+                    <button type="submit" class="btn btn-success" style="margin-top: 20px">update</button>
                 </div>
             </form>
         </div><!--Permission Component Edit Box Ends Here-->

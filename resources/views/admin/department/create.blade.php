@@ -1,12 +1,11 @@
 @extends('layouts.admin')
-@section('nav-title')
-    Department
+@section('title')
+    Create New Department
 @endsection
-
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Create</h3>
+            <h3 class="box-title">Create New Department</h3>
         </div>
         <!--form start-->
         <form action="{{route('department.store')}}" method="POST" class="" enctype="multipart/form-data">

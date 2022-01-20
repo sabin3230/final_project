@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\VehicleBooking;
+use App\Models\VehicleModel;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorevehiclebookingRequest;
+use App\Http\Requests\UpdatevehiclebookingRequest;
+
 
 class VehicleBookingController extends Controller
 {
@@ -14,7 +20,11 @@ class VehicleBookingController extends Controller
      */
     public function index()
     {
-        return view('vehicle_booking');
+        if(! Gate::allows('vehiclebooking-view')){
+            return abort(401);
+        }
+
+        return view('admin.booking_vehicle.index')->with('vehicleModel',VehicleBooking ::all());
     }
 
     /**
@@ -24,7 +34,7 @@ class VehicleBookingController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,8 +44,13 @@ class VehicleBookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        if(! Gate::allows('vehiclebooking-add')){
+            return abort(401);
+        }
+
+        VehicleBooking::create($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -46,7 +61,7 @@ class VehicleBookingController extends Controller
      */
     public function show(VehicleBooking $vehicleBooking)
     {
-        //
+
     }
 
     /**
@@ -78,8 +93,12 @@ class VehicleBookingController extends Controller
      * @param  \App\Models\VehicleBooking  $vehicleBooking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VehicleBooking $vehicleBooking)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('vehiclebooking-delete')){
+            return abort(401);
+        }
+        VehicleBooking::find($id)->delete();
+        return redirect()->route('vehiclebooking.index');
     }
 }

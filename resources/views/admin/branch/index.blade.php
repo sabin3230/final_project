@@ -1,7 +1,8 @@
 @extends('layouts.admin')
-@section('nav-title')
-    Branch
+@section('title')
+   Branch
 @endsection
+
 
 @section('content')
     <div class="row">

@@ -32,6 +32,11 @@ class PermissionComponentSeeder extends Seeder
             ['id' => 12, 'component' => 'Booking'],
             ['id' => 13, 'component' => 'Issue'],
             ['id' => 14, 'component' => 'servicing'],
+            ['id' => 15, 'component' => 'vehcilebooking'],
+            ['id' => 16, 'component' => 'Contact'],
+            ['id' => 17, 'component' => 'Feedback'],
+
+
 
 
         ];

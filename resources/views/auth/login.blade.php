@@ -1,6 +1,10 @@
-@extends('layouts.app')
-
+@extends('layouts.app1')
+@section('title')
+    Login
+@endsection
 @section('content')
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -57,6 +61,15 @@
                                     {{ __('Login') }}
                                 </button>
 
+                                <div class="links">
+                                    <br>
+                                @if (Route::has('register'))
+                                    <div class="register-link">
+                                    <a class="btn btn-link" href="{{ route('register') }}">{{ __('Create an Account ') }}</a>
+                                    </div>
+                                
+                            @endif
+
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
@@ -70,4 +83,37 @@
         </div>
     </div>
 </div>
+
+
+{{-- <div id="login-form-wrap">
+    <h2>Login</h2>
+    <form id="login-form"  method="POST" action="{{ route('login') }}">
+        @csrf
+
+      <p>
+      <input type="email" id="username" name="username" placeholder="Email Address" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocu required><i class="validation"><span></span><span></span></i>
+      @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+      @enderror
+      </p>
+      <p>
+        <input id="email" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" required><i class="validation"><span></span><span></span></i>
+
+        @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+        </p>
+      <p>
+      <input type="submit" id="login" value="Login">
+      </p>
+    </form>
+    <div id="create-account-wrap">
+      <p>Not a member? <a href="#">Create Account</a><p>
+    </div><!--create-account-wrap-->
+  </div> --}}
 @endsection
+

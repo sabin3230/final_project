@@ -11,7 +11,7 @@ class Customer extends Model
     protected $fillable =['id', 'user_id'];
 
     public function customerVehicles(){
-        return $this->hasMany(CustomerVehicle::class);
+        return $this->hasMany(CustomerVehicle::class,'customer_id','id');
     }
     public function user(){
         // dd($this->belongsTo(User::class, 'user_id'));

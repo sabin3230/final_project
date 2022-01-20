@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('nav-title')
+@section('title')
     Booking
 @endsection
 
@@ -39,14 +39,14 @@
                                         <td>{{$booking->customerVehicles->vehicle_no}}</td>
                                         @can('booking-action')
                                             <td class="action" >
-                                                @if (!$booking->servicings->isEmpty())
-                                                    <button class="btn btn-secondary" disabled="disabled">Servicing Started</button>
-                                                @else
+                                                @if ($booking->servicings == null)
                                                     <form action="{{route('servicing.store')}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="booking_id" value="{{$booking->id}}">
                                                         <button type='submit' class="btn btn-info">Start Servicing</button>
                                                     </form>
+                                                @else
+                                                    <button class="btn btn-secondary" disabled="disabled">Servicing Started</button>
                                                 @endif
                                             </td>
                                         @endcan

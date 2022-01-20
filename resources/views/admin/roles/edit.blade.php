@@ -1,10 +1,12 @@
 @extends('layouts.admin')
-
+@section('title')
+    Edit {{ $role->role }}
+@endsection
 @section('content')
     <!--Role Edit Box Starts Here-->
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">@lang('edit'): {{$role->role}}
+            <h3 class="box-title">Edit: {{$role->role}}</h3>
         </div>
         <div class="box-body">
             <!--Form Starts-->
@@ -13,13 +15,13 @@
                 @method('put')
 
                 <div class="form-group">
-                    <label for="role">@lang('role')</label>
+                    <label for="role">Role</label>
                     <input type="text" name="role" id="role" value="{{$role->role}}" class="form-control">
                 </div>
                 <div class="row">
                     @foreach ($p_components as $component)
                         <div class="col-md-4">
-                            <label for="">{{$component->component}} @lang('')</label>
+                            <label for=""><b>{{$component->component}}</b></label>
                             @foreach ($permissions as $permission)
                                 @if ($permission->p_component_id == $component->id)
                                     <div class='checkbox'>
@@ -38,7 +40,7 @@
                     @endforeach
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">@lang('update')</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </div>
             </form>
         </div>

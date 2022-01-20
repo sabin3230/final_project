@@ -15,10 +15,10 @@ class CreateFeedbackTable extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('customer_id')->unsigned();
-            $table->foreign('customer_id')
+            $table->bigInteger('servicing_id')->unsigned();
+            $table->foreign('servicing_id')
                   ->references('id')
-                  ->on('customers')->onDelete('cascade');
+                  ->on('servicings')->onDelete('cascade');
             $table->text('description');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateFeedbackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('feedbacks');
     }
 }

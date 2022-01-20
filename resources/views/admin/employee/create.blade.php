@@ -1,9 +1,11 @@
 @extends('layouts.admin')
-
+@section('title')
+    Create New Employee
+@endsection
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Create</h3>
+            <h3 class="box-title">Create New Employee</h3>
         </div>
         <!--form start-->
         <form action="{{route('employee.store')}}" method="post" role="form" class="">

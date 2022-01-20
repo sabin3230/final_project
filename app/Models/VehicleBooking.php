@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleBooking extends Model
 {
     use HasFactory;
-    protected $fillable =['id', 'first_name', 'last_name','address'.'contact', ' alt_contact','email','mode_name','engine_capacity','color'  'vehicle_model_id'];
+    protected $fillable =['id', 'first_name', 'last_name','address','contact', 'alt_contact','email','vehicle_model_id'];
+
+    public function vehiclemodel(){
+        return $this->belongsTo(VehicleModel::class, 'vehicle_model_id');
+    }
 
 }

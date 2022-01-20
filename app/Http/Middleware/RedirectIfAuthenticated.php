@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Attendance;
 
 class RedirectIfAuthenticated
 {
@@ -23,14 +24,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if(Auth::user()->role_id==1){
-                    return redirect(RouteServiceProvider::HOME);
-                }else if(Auth::user()->role_id==2){
-                    return redirect(RouteServiceProvider::EMPLOYEEHOME);
-                }else{
-                    return redirect(RouteServiceProvider::CUSTOMERHOME);
-
-                }
+                
             }
         }
 

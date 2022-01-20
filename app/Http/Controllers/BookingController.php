@@ -23,6 +23,7 @@ class BookingController extends Controller
         }
         $user = Auth::user();
         $user_role = $user->role_id;
+        // dd($user_role);
         if($user_role == 1){
             return view('admin.booking.index')->with('bookings', Booking::all());
         }else if($user_role == 3){
@@ -60,7 +61,7 @@ class BookingController extends Controller
         if(! Gate::allows('booking-add')){
             return abort(401);
         }
-        // dd($request->all());
+        // dd($request->all());s
         $booking = Booking::create([
             'customer_vehicle_id'=>request('customer_vehicle_id'),
             'completed_km'=>request('completed_km'),

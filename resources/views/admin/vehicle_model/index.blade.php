@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('nav-title')
+@section('title')
    Vehicle Model
 @endsection
 

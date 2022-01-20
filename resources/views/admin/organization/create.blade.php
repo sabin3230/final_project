@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('nav-title')
-    Organization
+@section('title')
+    Create New Organization
 @endsection
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Create</h3>
+            <h3 class="box-title">Create New Organization</h3>
         </div>
         <!--form start-->
         <form action="{{route('org.store')}}" method="POST" class="" enctype="multipart/form-data">
@@ -34,10 +34,6 @@
                 <div class="form-group">
                     <label for="component">Email</label>
                     <input type="email" name="email" id="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="component">Alternative email</label>
-                    <input type="email" name="alt_email" id="alt_email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="component">Facebook link</label>

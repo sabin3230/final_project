@@ -7,7 +7,7 @@
 
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Edit</h3>
+                <h3 class="box-title">Edit: {{$branchs->branch_name}}</h3>
             </div>
             <!--form start-->
             <form action="{{route('branch.update', ['branch' => $branchs->id])}}" method="post" role="form" enctype="multipart/form-data">
@@ -32,15 +32,15 @@
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select name="status" id="">
+                    <select name="status" id="" style="margin-top: 10px">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="color">Organization</label>
-                    <select name="organization_id" id="">
+                    <label for="">Organization</label>
+                    <select name="organization_id" id="" style="margin-top: 10px">
                     <option value="{{$branchs->organization_id}}">{{$branchs->organization->name}}</option>
                     @foreach($organizations as $organization)
                         <option value="{{$organization->id}}">{{$organization->name}}</option>
@@ -50,7 +50,7 @@
                 
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-success">update</button>
+                    <button type="submit" class="btn btn-success" style="margin-top: 20px">update</button>
                 </div>
             </form>
         </div><!--Permission Component Edit Box Ends Here-->

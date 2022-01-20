@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Feedback extends Model
 {
     use HasFactory;
-    protected $fillable =['id','customer_id','description'];
+    protected $fillable =['id','servicing_id','description'];
+    public $table = 'feedbacks';
+
+    public function servicing()
+    {
+        return $this->belongsTo(Servicing::class, 'servicing_id');
+    }
+
 }

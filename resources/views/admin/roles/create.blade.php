@@ -1,24 +1,26 @@
 @extends('layouts.admin')
-
+@section('title')
+    Create New Role
+@endsection
 @section('content')
     <!--Role Create Box Starts Here-->
     <div class="box">
         <div class="box-header">
-            @lang('create')
+            <h3 class="box-title">Create New Role</h3>
         </div>
         <div class="box-body">
             <!--Form Start-->
             <form action="{{route('role.store')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="role">@lang('Users')</label>
+                    <label for="role">Role</label>
                     <input type="text" name="role" id="role" class="form-control">
                 </div>
                 <!--Show Permissions According to the Permission Component-->
                 <div class="row">
                     @foreach ($p_components as $component)
                         <div class="col-md-4">
-                            <label for="">{{$component->component}}</label>
+                            <label for=""><b>{{$component->component}}</b></label>
                             @foreach ($permissions as $permission)
                                 @if ($permission->p_component_id == $component->id)
                                     <div class='checkbox'>
@@ -30,7 +32,7 @@
                     @endforeach
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">@lang('submit')</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>

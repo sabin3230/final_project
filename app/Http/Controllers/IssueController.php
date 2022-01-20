@@ -100,7 +100,7 @@ class IssueController extends Controller
      * @param  \App\Models\Issue  $issue
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Issue $issue)
+    public function destroy($id)
     {
         if(! Gate::allows('issue-delete')){
             return abort(401);

@@ -1,13 +1,13 @@
 @extends('layouts.admin')
-@section('nav-title')
-    Organization
+@section('title')
+    Edit {{$org->name}}
 @endsection
 
 @section('content')
         <!--Permission Component Edit Box Starts Here-->
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Edit</h3>
+                <h3 class="box-title">Edit: {{$org->name}}</h3>
             </div>
             <!--form start-->
             <form action="{{route('org.update', ['org' => $org->id])}}" method="post" role="form" enctype="multipart/form-data">
@@ -39,10 +39,7 @@
                     <label for="component">Email</label>
                     <input type="email" name="email" id="email" value="{{$org->email}}" class="form-control">
                 </div>
-                <div class="form-group">
-                    <label for="component">Alternative email</label>
-                    <input type="email" name="alt_email" id="alt_email" value="{{$org->alt_email}}" class="form-control">
-                </div>
+
                 <div class="form-group">
                     <label for="component">Facebook link</label>
                     <input type="text" name="facebook_link" id="address" value="{{$org->facebook_link}}" class="form-control">
@@ -57,7 +54,7 @@
                 </div>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-success">update</button>
+                    <button type="submit" class="btn btn-success" style="margin-top: 20px">update</button>
                 </div>
             </form>
         </div><!--Permission Component Edit Box Ends Here-->

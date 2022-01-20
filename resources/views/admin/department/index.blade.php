@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('nav-title')
-   Department
+@section('title')
+    Department
 @endsection
 
 @section('content')

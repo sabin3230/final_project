@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('nav-title')
-    Create Issue
+@section('title')
+   Create New Issue
 @endsection
 
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Create</h3>
+            <h3 class="box-title">Create New Issue</h3>
         </div>
         <!--form start-->
         <form action="{{route('issue.store')}}" method="POST" class="" enctype="multipart/form-data">

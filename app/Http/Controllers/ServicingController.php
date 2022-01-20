@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ServicingCompleteMail;
+use Illuminate\Support\Facades\Gate;
 
 class ServicingController extends Controller
 {
@@ -89,9 +90,14 @@ class ServicingController extends Controller
      * @param  \App\Models\Servicing  $servicing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Servicing $servicing)
+    public function destroy($id)
     {
-        
+        if(! Gate::allows('servicing-delete')){
+            return abort(401);
+        }
+        Servicing::find($id)->delete();
+        return redirect()->route('servicing.index');
+
     }
 
     public function getStartTask($id): \Illuminate\Http\JsonResponse

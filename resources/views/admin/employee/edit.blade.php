@@ -1,9 +1,11 @@
 @extends('layouts.admin')
-
+@section('title')
+    Edit {{$employee->user->first_name}}
+@endsection
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Edit</h3>
+            <h3 class="box-title">Edit: {{$employee->user->first_name}}</h3>
         </div>
         <!--form start-->
         <form action="{{route('employee.update',['employee' => $employee->id])}}" method="post" role="form" class="">
@@ -67,7 +69,7 @@
                
             </div><!-- /.box-body -->
             <div class="box-footer">
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success" style="margin-top: 20px">Submit</button>
             </div>
         </form>
     </div><!--Permission Component Create Box Ends Here-->

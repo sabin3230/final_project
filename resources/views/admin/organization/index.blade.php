@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('nav-title')
+@section('title')
     Organization
 @endsection
 
@@ -22,7 +22,6 @@
                                 <th>Contact</th>
                                 <th>Alt Contact</th>
                                 <th>Email</th>
-                                <th>Alt Email</th>
                                 <th>FB Link</th>
                                 <th>Insta Link</th>
                                 <th>Description</th>
@@ -43,7 +42,6 @@
                                         <td>{{$org->contact}}</td>
                                         <td>{{$org->alt_contact}}</td>
                                         <td>{{$org->email}}</td>
-                                        <td>{{$org->alt_email}}</td>
                                         <td>{{$org->facebook_link}}</td>
                                         <td>{{$org->instagram_link}}</td>
                                         <td>{{$org->description}}</td>

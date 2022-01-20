@@ -17,4 +17,8 @@ class VehicleModel extends Model
     public function CustomerVehicle(){
         return $this->hasMany(CustomerVehicle::class);
     }
+
+    public function vehicleBookings(){
+        return $this->hasMany(VehicleBooking::class);
+    }
 }

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('nav-title')
-    Vehicle Models
+@section('title')
+    Create New Vehicle Model
 @endsection
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Create</h3>
+            <h3 class="box-title">Create New Vehicle Model</h3>
         </div>
         <!--form start-->
         <form action="{{route('vehicle-model.store')}}" method="POST" class="" enctype="multipart/form-data">
@@ -23,7 +23,10 @@
                     <label for="color">Color</label>
                     <input type="text" name="color" id="color"  class="form-control">
                 </div>
-                <select name="organization_id" id="">
+
+                <label for="">Organization</label>
+                <select name="organization_id" id="" style="margin-top: 10px">
+ 
                     <option value="">-------</option>
                     @foreach($organizations as $organization)
                         <option value="{{$organization->id}}">{{$organization->name}}</option>

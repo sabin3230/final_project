@@ -36,7 +36,8 @@
                                         <td>{{$booking->booking_time}}</td>
                                         <td>{{$booking->completed_km}}</td>
                                         <td>{{$booking->description}}</td>
-                                        
+                                        <td>{{$booking->customerVehicles->vehicle_no}}</td>
+
                                         @can('booking-action')
                                             <td class="action" >
                             

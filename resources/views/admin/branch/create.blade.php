@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('nav-title')
-    branch
+@section('title')
+    Create New Branch
 @endsection
 
 @section('content')
 <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Create</h3>
+            <h3 class="box-title">Create New Branch</h3>
         </div>
         <!--form start-->
         <form action="{{route('branch.store')}}" method="POST" class="" enctype="multipart/form-data">
@@ -34,13 +34,14 @@
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select name="status" id="">
+                    <select name="status" id="" style="margin-top: 10px">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
                 </div>
                 
-                <select name="org_id" id="">
+                <label for="">Organization</label>
+                <select name="org_id" id="" style="margin-top: 10px">
                     <option value="">-------</option>
                     @foreach($organizations as $organization)
                         <option value="{{$organization->id}}">{{$organization->name}}</option>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorecontactRequest;
+use App\Http\Requests\UpdatecontactRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ContactController extends Controller
 {
@@ -14,7 +17,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        if(! Gate::allows('contact-view')){
+            return abort(401);
+        }
+        return view('admin.contact')->with('contacts', Contact::all());
     }
 
     /**
@@ -35,7 +41,12 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(! Gate::allows('contact-add')){
+            return abort(401);
+        }
+
+        Contact::create($request->all());
+        return redirect()->route('landing');
     }
 
     /**
@@ -78,8 +89,14 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        if(! Gate::allows('contact-delete')){
+            return abort(401);
+        }
+        Contact::find($id)->delete();
+        return redirect()->route('contact.index');
+
+
     }
 }

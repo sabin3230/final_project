@@ -84,6 +84,23 @@ class PermissionSeeder extends Seeder
             ['permission' => 'servicing-view', 'p_component_id' => 14],
             ['permission' => 'servicing-edit', 'p_component_id' => 14],
             ['permission' => 'servicing-delete', 'p_component_id' => 14],
+            ['permission' => 'vehiclebooking-action', 'p_component_id' => 15],
+            ['permission' => 'vehiclebooking-add', 'p_component_id' => 15],
+            ['permission' => 'vehiclebooking-view', 'p_component_id' => 15],
+            ['permission' => 'vehiclebooking-edit', 'p_component_id' => 15],
+            ['permission' => 'vehiclebooking-delete', 'p_component_id' => 15],
+            ['permission' => 'contact-action', 'p_component_id' => 16],
+            ['permission' => 'contact-add', 'p_component_id' => 16],
+            ['permission' => 'contact-view', 'p_component_id' => 16],
+            ['permission' => 'contact-edit', 'p_component_id' => 16],
+            ['permission' => 'contact-delete', 'p_component_id' => 16],
+            ['permission' => 'feedback-action', 'p_component_id' => 17],
+            ['permission' => 'feedback-add', 'p_component_id' => 17],
+            ['permission' => 'feedback-view', 'p_component_id' => 17],
+            ['permission' => 'feedback-edit', 'p_component_id' => 17],
+            ['permission' => 'feedback-delete', 'p_component_id' => 17],
+
+
 
 
 
