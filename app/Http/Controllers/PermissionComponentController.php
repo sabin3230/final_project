@@ -92,7 +92,7 @@ class PermissionComponentController extends Controller
         if (!Gate::allows('permission-edit')) {
             return abort(401);
         }
-        permission_component::find($id)->update($request->all());
+        PermissionComponent::find($id)->update($request->all());
 
         return redirect()->route('p_component.index');
     }
@@ -108,7 +108,7 @@ class PermissionComponentController extends Controller
         if (!Gate::allows('permission-delete')) {
             return abort(401);
         }
-        permission_component::find($id)->delete();
+        PermissionComponent::find($id)->delete();
 
         return redirect()->back();
     }

@@ -18,6 +18,9 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if(! Gate::allows('role-view')){
+            return abort(401);
+        }
         //dd('hello');
         return view('admin.roles.index')->with('roles', Role::all());
     }

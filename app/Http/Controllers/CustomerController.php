@@ -26,6 +26,9 @@ class CustomerController extends Controller
 
     public function dashboard()
     {
+        if(! Gate::allows('customer-dashboard')){
+            return abort(401);
+        }
         $customer=Auth::user()->customer;
         $customerVehicle = $customer->customerVehicles;
         $bookings = collect();

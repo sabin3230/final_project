@@ -8,11 +8,15 @@ use App\Models\Attendence;
 use App\Models\Servicing;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\Gate;
 
 class EmployeeDashboardController extends Controller
 {
     public function index()
     {
+        if(! Gate::allows('employee-dashboard')){
+            return abort(401);
+        }
         $employee = Auth::user()->employee;
         $employee_join_date = $employee->created_at;
         $end = Carbon::now();
@@ -44,8 +48,8 @@ class EmployeeDashboardController extends Controller
         return view('employee.dashboard', 
                     compact('present'),
                     compact('absent'),
-                    compact('servicings')
-                )->with('servicing_count', $servicing_count);
+                )->with('servicing_count', $servicing_count)
+                ->with('servicings',$servicings);
     }
 
 }

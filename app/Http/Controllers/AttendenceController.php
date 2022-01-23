@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendence;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Carbon\Carbon;
 
 class AttendenceController extends Controller
 {
@@ -14,7 +17,13 @@ class AttendenceController extends Controller
      */
     public function index()
     {
-        
+        if(! Gate::allows('attendance-view')){
+            return abort(401);
+        }
+        $today = Carbon::now();
+        $attendances = Attendence::whereDate('start_date_time',$today->format('Y-m-d'))->get();
+        return view('admin.attendance')->with('attendances', Attendence::all())
+                                        ->with('employees', Employee::all());
     }
 
     /**
@@ -35,7 +44,11 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(! Gate::allows('attendance-add')){
+            return abort(401);
+        }
+        Attendance::create($request->all());
+        return redirect()->route('admin.attendance');
     }
 
     /**

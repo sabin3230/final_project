@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/vehiclebooking', [App\Http\Controllers\VehicleBookingController::class,'index'])->name('vehiclebooking.index'); 
     Route::delete('/vehiclebooking/{vehiclebooking}', [App\Http\Controllers\VehicleBookingController::class,'destroy'])->name('vehiclebooking.destroy'); 
     Route::get('feedback', [App\Http\Controllers\FeedbackController::class, 'index'])->name('admin.feedback'); 
+    Route::get('attendance', [App\Http\Controllers\AttendenceController::class, 'index'])->name('attendance.index');
 
     Route::delete('/feedback/{feedback}', [App\Http\Controllers\FeedbackController::class,'destroy'])->name('feedback.destroy'); 
     
@@ -66,7 +67,9 @@ Route::group(['prefix' => 'customer','middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'employee','middleware' => 'auth'], function () {
     Route::get('dashboard', [App\Http\Controllers\EmployeeDashboardController::class,'index'])->name('employee.dashboard');
-
+    Route::post('attendance', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store'); 
+    
+    
 });
 
 // Auth::routes();

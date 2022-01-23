@@ -1,7 +1,8 @@
-@extends('layouts.customer')
+@extends('layouts.app1')
+@section('title')
+    Booking Vehicle
+@endsection
 @section('content')
-
-<div class="container">
     <div class="box-header">
     <h3 class="box-title"> Servicing</h3>
     </div>
@@ -74,6 +75,8 @@
                           <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>   
                   </form>
+
+                  
             </div>
           </div>
         </div>

@@ -7,11 +7,15 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use App\Models\Servicing;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Gate;
 use DB;
 
 class ChartController extends Controller
 {
     public function servicing(){
+        if(! Gate::allows('admin-dashboard')){
+            return abort(401);
+        }
         $start= Carbon::now()->subDays(30);
         $end = Carbon::now();
         $period = CarbonPeriod::create($start, $end);

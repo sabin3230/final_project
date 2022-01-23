@@ -17,16 +17,16 @@
 
         <meta content="" name="description">
         <meta content="" name="keywords">
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="{{ url('assets/img/favicon.png" rel="icon')}}"> 
+        <link href="{{ url('assets/img/apple-touch-icon.png" rel="apple-touch-icon')}}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-        <link href="adminassets/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> 
+        <link href="{{ url('adminassets/vendor/animate.css/animate.min.css" rel="stylesheet')}}">
+        <link href="{{ url('assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet')}}">
+        <link href="{{ url('assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet')}}">
+        <link href="{{ url('assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet')}}">
+        <link href="{{ url('assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet')}}">
+        <link href="{{ url('assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet')}}"> 
         
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -62,7 +62,16 @@
                             <a href="{{ route('dash') }}" class="btn btn-info me-2">Dashboard</a>
                             
                         @elseif(Auth::user()->role_id==3)
-                            <a href="{{ route('customer-dashboard') }}" class="btn btn-info me-2">Dashboard</a>
+
+                            <a class="btn btn-success me-2" style="margin-left: 20px" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         @else
                             <a href="{{ route('employee.dashboard') }}" class="btn btn-info me-2">Dashboard</a>
                         @endif
@@ -96,13 +105,18 @@
         
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+
+            <script src="{{ url('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+        <script src="{{ url('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+        <script src="{{ url('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+        <script src="{{ url('assets/vendor/php-email-form/validate.js')}}"></script>
     
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-    
-        <script src="assets/js/main.js"></script>
+        <script src="{{ url('assets/js/main.js')}}"></script>
+        @yield('js')
     </body>
 </html>

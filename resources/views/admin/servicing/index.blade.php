@@ -299,9 +299,6 @@
         });
 
 
-
-
-
         function checkIssue(id) {
             let modal_body = $('.modal-body .form-check')
             $.ajax({

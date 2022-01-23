@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+
 use Session;
 
 class PermissionController extends Controller
@@ -86,12 +87,16 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $permission = Permission::find($id);
-        $permission->permission = str_slug($request->permission);
-        $permission->p_component_id = $request->component;
-        $permission->save();
+        // $permission = Permission::find($id);
+        // $permission->permission = str_slug($request->permission);
+        // $permission->p_component_id = $request->component;
+        // $permission->save();
         
-        Session::flash('success', 'Permission Updated Successfully!!!');
+        // Session::flash('success', 'Permission Updated Successfully!!!');
+        // return redirect()->route('permission.index');
+
+        Permission::find($id)->update($request->all());
+
         return redirect()->route('permission.index');
     }
 

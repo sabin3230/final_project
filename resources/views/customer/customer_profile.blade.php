@@ -1,6 +1,6 @@
 @extends('layouts.app1')
 @section('title')
-    RoyalRide
+   Cuatomer profile
 @endsection
 @section('content')
 <div class="container">
@@ -190,7 +190,7 @@
                   </div>
                   <div class="form-group">
                       <label for="booking_date"> Booking date</label>
-                      <input type="text" name="booking_date" id=""  class="form-control datepicker" autocomplete="off">
+                      <input type="text" name="booking_date" id="booking_date"  class="form-control" autocomplete="off">
                   </div>
                   <div class="form-group">
                       <label for="input-limited-range">Booking Time</label>
@@ -223,14 +223,10 @@
                     <button type="submit" class="btn btn-primary">Save changes</button>
                   </div>   
             </form>
-  
       </div>
     </div>
   </div>
 </div>
-
-
-
 @endsection
 @section('js')
   <script>
@@ -254,6 +250,10 @@
     });
    
     $('.datepicker').datepicker({ 
+        // startDate: new Date(),
+        format: 'yyyy-mm-dd'
+    });
+    $('#booking_date').datepicker({ 
         startDate: new Date(),
         format: 'yyyy-mm-dd'
     });

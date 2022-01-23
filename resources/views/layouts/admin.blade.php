@@ -150,6 +150,15 @@
                             </a>
                         </li>
                          @endcan
+
+                         @can('attendance-view')
+                            <li>
+                                <a href="{{route('attendance.index')}}" class="nav-link text-white">
+                                <i class="fas fa-comments"></i>
+                                <span>Attendance</span>
+                                </a>
+                            </li>
+                         @endcan
                         
                         @can('feedback-view')
                             <li>

@@ -99,6 +99,14 @@ class PermissionSeeder extends Seeder
             ['permission' => 'feedback-view', 'p_component_id' => 17],
             ['permission' => 'feedback-edit', 'p_component_id' => 17],
             ['permission' => 'feedback-delete', 'p_component_id' => 17],
+            ['permission' => 'admin-dashboard', 'p_component_id' => 18],
+            ['permission' => 'employee-dashboard', 'p_component_id' => 18],
+            ['permission' => 'customer-dashboard', 'p_component_id' => 18],
+            ['permission' => 'attendance-action', 'p_component_id' => 19],
+            ['permission' => 'attendance-add', 'p_component_id' => 19],
+            ['permission' => 'attendance-view', 'p_component_id' => 19],
+            ['permission' => 'attendance-edit', 'p_component_id' => 19],
+            ['permission' => 'attendance-delete', 'p_component_id' => 19],
 
 
 
